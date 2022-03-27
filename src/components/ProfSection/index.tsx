@@ -11,8 +11,9 @@ export const ProfSection = () => {
       display="flex"
       alignItems="center"
       flexDir="column"
+      pb="2rem"
     >
-      <Typography variant="display" color="white">
+      <Typography variant="display" color="white" textAlign="center">
         CONHEÇA NOSSO INSTRUTOR
       </Typography>
       <CardProf />

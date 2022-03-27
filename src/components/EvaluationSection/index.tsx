@@ -13,7 +13,7 @@ export const EvaluationSection = () => {
       flexDir="column"
       borderTop="4px solid #ca2b2b"
     >
-      <Typography variant="display" color="white">
+      <Typography variant="display" color="white" textAlign="center">
         AVALIAÇÃO DOS NOSSOS ALUNOS
       </Typography>
       <EvaluationSlider />

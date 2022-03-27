@@ -1,9 +1,11 @@
-import { Box } from '@chakra-ui/react'
+import { Box, useMediaQuery } from '@chakra-ui/react'
 import { CardPlans } from 'components/CardPlans'
 import { Typography } from 'components/Typography'
 import { data } from './data'
 
 export const Plans = () => {
+  const [isDesktop] = useMediaQuery('(min-width: 768px)')
+
   return (
     <Box
       width="100%"
@@ -14,14 +16,14 @@ export const Plans = () => {
       alignItems="center"
       flexDir="column"
     >
-      <Typography variant="display" color="white">
-        ESCOLHA O MELHOR PLANO PARA VOCÊOS
+      <Typography variant="display" color="white" textAlign="center">
+        ESCOLHA O MELHOR PLANO PARA VOCÊ
       </Typography>
       <Box
         width="100%"
         display="flex"
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent={isDesktop ? 'space-between' : 'center'}
         flexWrap="wrap"
       >
         {data.map(({ items, title }) => (

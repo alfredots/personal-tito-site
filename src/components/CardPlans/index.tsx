@@ -1,4 +1,4 @@
-import { Box, Button, Image } from '@chakra-ui/react'
+import { Box, Button, Image, useMediaQuery } from '@chakra-ui/react'
 import { Typography } from 'components/Typography'
 
 type CardPlansProps = {
@@ -25,6 +25,8 @@ const Item = ({ text, subtext }: ItemProps) => {
 }
 
 export const CardPlans = ({ title, items }: CardPlansProps) => {
+  const [isDesktop] = useMediaQuery('(min-width: 768px)')
+
   return (
     <Box
       maxW="380px"
@@ -38,6 +40,7 @@ export const CardPlans = ({ title, items }: CardPlansProps) => {
       flexDir="column"
       alignItems="center"
       position="relative"
+      mt={isDesktop ? '0' : '1rem'}
     >
       <Typography
         uppercase

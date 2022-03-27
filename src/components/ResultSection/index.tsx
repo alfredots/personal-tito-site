@@ -13,7 +13,7 @@ export const ResultSection = () => {
       flexDir="column"
       borderTop="4px solid #ca2b2b"
     >
-      <Typography variant="display" color="white">
+      <Typography variant="display" color="white" textAlign="center">
         RESULTADO DE NOSSOS ALUNOS
       </Typography>
       <ResultSlider />
