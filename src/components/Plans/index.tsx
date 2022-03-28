@@ -24,6 +24,7 @@ export const Plans = () => {
         display="flex"
         alignItems="center"
         justifyContent={isDesktop ? 'space-between' : 'center'}
+        gap="0.6rem"
         flexWrap="wrap"
       >
         {data.map(({ items, title }) => (

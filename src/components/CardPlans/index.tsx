@@ -1,4 +1,5 @@
 import { Box, Button, Image, useMediaQuery } from '@chakra-ui/react'
+import { useWhats } from 'common/hooks/useWhats'
 import { Typography } from 'components/Typography'
 
 type CardPlansProps = {
@@ -25,12 +26,13 @@ const Item = ({ text, subtext }: ItemProps) => {
 }
 
 export const CardPlans = ({ title, items }: CardPlansProps) => {
+  const { sendToWhats } = useWhats()
   const [isDesktop] = useMediaQuery('(min-width: 768px)')
 
   return (
     <Box
       maxW="380px"
-      minH="550px"
+      minH="636.94px"
       borderRadius="8px"
       borderColor="red.500"
       borderWidth="2px"
@@ -56,7 +58,13 @@ export const CardPlans = ({ title, items }: CardPlansProps) => {
           <Item key={text + title} text={text} subtext={subtext} />
         ))}
       </Box>
-      <Button position="absolute" bottom="10px" width="97%" colorScheme="red">
+      <Button
+        onClick={() => sendToWhats()}
+        position="absolute"
+        bottom="10px"
+        width="97%"
+        colorScheme="red"
+      >
         COMECE AGORA!
       </Button>
     </Box>

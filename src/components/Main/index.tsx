@@ -7,14 +7,15 @@ import { HeroMobile } from 'components/HeroMobile'
 import { Plans } from 'components/Plans'
 import { ProfSection } from 'components/ProfSection'
 import { ResultSection } from 'components/ResultSection'
+import { useBreakpointValue } from '@chakra-ui/react'
 
 export const Main = () => {
-  const [isDesktop] = useMediaQuery('(min-width: 768px)')
+  const isMinWidthLg = useBreakpointValue({ lg: true })
 
   return (
     <Box bgColor="black.500" width="100%" p="0rem">
       <Container maxWidth="1366px" px="0">
-        {isDesktop ? <Hero /> : <HeroMobile />}
+        {isMinWidthLg ? <Hero /> : <HeroMobile />}
         <Benefits />
         <Plans />
         <ProfSection />

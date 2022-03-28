@@ -1,25 +1,25 @@
-import { Box, Image, useMediaQuery } from '@chakra-ui/react'
+import { Box, Image, useBreakpointValue, useMediaQuery } from '@chakra-ui/react'
 import { Typography } from 'components/Typography'
 
 export const CardProf = () => {
-  const [isDesktop] = useMediaQuery('(min-width: 768px)')
+  const isMinWidthLg = useBreakpointValue({ lg: true })
   return (
     <Box
       w="100%"
-      maxW={isDesktop ? '890px' : '304px'}
+      maxW={isMinWidthLg ? '890px' : '304px'}
       minH="330px"
       backgroundColor="white"
       boxShadow="4px 4px 0px #E45A4D"
       display="flex"
-      flexDirection="column"
+      flexDirection={isMinWidthLg ? 'row' : 'column'}
     >
       <Image
-        src={isDesktop ? 'img/prof.png' : 'img/prof-mobile.png'}
+        src={isMinWidthLg ? 'img/prof.png' : 'img/prof-mobile.png'}
         alt="foto do instrutor"
         maxW="304px"
         height="330px"
       />
-      <Box width={isDesktop ? '100%' : '304px'} p="1rem">
+      <Box width={isMinWidthLg ? '100%' : '304px'} p="1rem">
         <Typography
           width="100%"
           variant="display"

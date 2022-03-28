@@ -1,7 +1,10 @@
-import { Box, Button, Container, Image } from '@chakra-ui/react'
+import { Box, Button, Image } from '@chakra-ui/react'
 import { Typography } from 'components/Typography'
+import { useWhats } from './../../common/hooks/useWhats'
 
 export const Hero = () => {
+  const { sendToWhats } = useWhats()
+
   return (
     <Box
       width="100%"
@@ -24,7 +27,9 @@ export const Hero = () => {
         <Typography variant="title" color="gray.100">
           VOU TE LEVAR A SUA MELHOR VERSÃO FÍSICA E MENTAL
         </Typography>
-        <Button colorScheme="red">COMECE AGORA!</Button>
+        <Button onClick={() => sendToWhats()} colorScheme="red">
+          COMECE AGORA!
+        </Button>
       </Box>
       <Image width="60%" src="img/hero.png" alt="imagem do instrutor" />
     </Box>
