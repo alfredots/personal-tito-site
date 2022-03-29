@@ -1,15 +1,16 @@
 import Slider from 'react-slick'
-import { Box, Image, useMediaQuery } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
+import { useQuery } from 'common/hooks/useQuery'
 
 export const ResultSlider = () => {
-  const [isDesktop] = useMediaQuery('(min-width: 768px)')
-  const measure = isDesktop ? '350px' : '250px'
+  const { isMinWidthLg } = useQuery()
+  const measure = isMinWidthLg ? '350px' : '250px'
 
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: isDesktop ? 3 : 1,
+    slidesToShow: isMinWidthLg ? 3 : 1,
     slidesToScroll: 1
   }
 

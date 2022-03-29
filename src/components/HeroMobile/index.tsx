@@ -4,7 +4,12 @@ import { Typography } from 'components/Typography'
 export const HeroMobile = () => {
   return (
     <Box width="100%" display="flex" alignItems="center" flexDir="column" p="0">
-      <Typography variant="display" color="gray.100" textAlign="center">
+      <Typography
+        variant="display"
+        color="gray.100"
+        textAlign="center"
+        pt="1rem"
+      >
         HORA DE SUBIR O NÍVEL!
       </Typography>
       <Box

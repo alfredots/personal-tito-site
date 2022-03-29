@@ -1,5 +1,5 @@
 import { Text, TextProps } from '@chakra-ui/react'
-import { useMediaQuery } from '@chakra-ui/react'
+import { useQuery } from 'common/hooks/useQuery'
 import React, { ReactNode } from 'react'
 
 type TypographyProps = {
@@ -69,13 +69,13 @@ export const Typography = ({
   uppercase,
   ...rest
 }: TypographyProps) => {
-  const [isDesktop] = useMediaQuery('(min-width: 1024px)')
+  const { isMinWidthLg } = useQuery()
   return (
     <Text
       color={color}
       fontFamily="Inter"
       {...(uppercase && { textTransform: 'uppercase' })}
-      {...(isDesktop ? configDesktop[variant] : configMobile[variant])}
+      {...(isMinWidthLg ? configDesktop[variant] : configMobile[variant])}
       {...rest}
     >
       {children}

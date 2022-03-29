@@ -1,10 +1,11 @@
-import { Box, useMediaQuery } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { CardPlans } from 'components/CardPlans'
 import { Typography } from 'components/Typography'
 import { data } from './data'
+import { useQuery } from './../../common/hooks/useQuery'
 
 export const Plans = () => {
-  const [isDesktop] = useMediaQuery('(min-width: 768px)')
+  const { isMinWidthLg } = useQuery()
 
   return (
     <Box
@@ -23,7 +24,7 @@ export const Plans = () => {
         width="100%"
         display="flex"
         alignItems="center"
-        justifyContent={isDesktop ? 'space-between' : 'center'}
+        justifyContent={isMinWidthLg ? 'space-between' : 'center'}
         gap="0.6rem"
         flexWrap="wrap"
       >

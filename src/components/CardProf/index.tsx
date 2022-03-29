@@ -1,8 +1,9 @@
-import { Box, Image, useBreakpointValue, useMediaQuery } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
 import { Typography } from 'components/Typography'
+import { useQuery } from './../../common/hooks/useQuery'
 
 export const CardProf = () => {
-  const isMinWidthLg = useBreakpointValue({ lg: true })
+  const { isMinWidthLg } = useQuery()
   return (
     <Box
       w="100%"

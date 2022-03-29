@@ -1,9 +1,10 @@
 import Slider from 'react-slick'
-import { Box, Image, useMediaQuery } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { Typography } from 'components/Typography'
+import { useQuery } from './../../common/hooks/useQuery'
 
 export const EvaluationSlider = () => {
-  const [isDesktop] = useMediaQuery('(min-width: 768px)')
+  const { isMinWidthLg } = useQuery()
   const settings = {
     dots: false,
     infinite: true,
@@ -18,7 +19,7 @@ export const EvaluationSlider = () => {
         <Box>
           <Typography
             mx="2rem"
-            variant={isDesktop ? 'title' : 'body'}
+            variant={isMinWidthLg ? 'title' : 'body'}
             color="gray.100"
             textAlign="center"
           >
@@ -28,7 +29,7 @@ export const EvaluationSlider = () => {
           </Typography>
           <Typography
             mt="4rem"
-            variant={isDesktop ? 'title' : 'body'}
+            variant={isMinWidthLg ? 'title' : 'body'}
             color="gray.100"
             textAlign="center"
           >
@@ -41,7 +42,7 @@ export const EvaluationSlider = () => {
         <Box>
           <Typography
             mx="2rem"
-            variant={isDesktop ? 'title' : 'body'}
+            variant={isMinWidthLg ? 'title' : 'body'}
             color="gray.100"
             textAlign="center"
           >

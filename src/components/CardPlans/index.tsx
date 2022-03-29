@@ -1,6 +1,7 @@
-import { Box, Button, Image, useMediaQuery } from '@chakra-ui/react'
+import { Box, Button, Image } from '@chakra-ui/react'
 import { useWhats } from 'common/hooks/useWhats'
 import { Typography } from 'components/Typography'
+import { useQuery } from './../../common/hooks/useQuery'
 
 type CardPlansProps = {
   title: string
@@ -27,7 +28,7 @@ const Item = ({ text, subtext }: ItemProps) => {
 
 export const CardPlans = ({ title, items }: CardPlansProps) => {
   const { sendToWhats } = useWhats()
-  const [isDesktop] = useMediaQuery('(min-width: 768px)')
+  const { isMinWidthLg } = useQuery()
 
   return (
     <Box
@@ -42,7 +43,7 @@ export const CardPlans = ({ title, items }: CardPlansProps) => {
       flexDir="column"
       alignItems="center"
       position="relative"
-      mt={isDesktop ? '0' : '1rem'}
+      mt={isMinWidthLg ? '0' : '1rem'}
     >
       <Typography
         uppercase
