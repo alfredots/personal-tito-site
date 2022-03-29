@@ -1,4 +1,5 @@
 import { useBreakpointValue } from '@chakra-ui/react'
+import { useEffect } from 'react'
 
 export const useQuery = () => {
   const isMinWidthXs = useBreakpointValue({ xs: true })
