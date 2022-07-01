@@ -20,6 +20,7 @@ export const Hero = () => {
         display="flex"
         flexDirection="column"
         gap="2rem"
+        paddingLeft="1rem"
       >
         <Typography variant="display" color="gray.100">
           HORA DE SUBIR O NÍVEL!

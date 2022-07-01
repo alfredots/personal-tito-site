@@ -24,7 +24,7 @@ export const Main = () => {
         {isDesktop ? <Hero /> : <HeroMobile />}
         <Benefits />
         <Plans />
-        <ProfSection />
+        {/* <ProfSection /> */}
         <ResultSection />
         <EvaluationSection />
         <Footer />

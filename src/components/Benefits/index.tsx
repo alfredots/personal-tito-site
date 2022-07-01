@@ -12,7 +12,7 @@ export const Benefits = () => {
       padding="10px"
       display="flex"
       alignItems="center"
-      justifyContent={isMinWidthLg ? 'space-between' : 'center'}
+      justifyContent={isMinWidthLg ? 'space-around' : 'center'}
       gap="2rem"
       borderTop="4px solid #ca2b2b"
       flexWrap="wrap"

@@ -2,6 +2,7 @@ import Slider from 'react-slick'
 import { Box } from '@chakra-ui/react'
 import { Typography } from 'components/Typography'
 import { useQuery } from './../../common/hooks/useQuery'
+import { data } from './data'
 
 export const EvaluationSlider = () => {
   const { isMinWidthLg } = useQuery()
@@ -16,52 +17,31 @@ export const EvaluationSlider = () => {
   return (
     <Box width="100%" px="2rem">
       <Slider {...settings}>
-        <Box>
-          <Typography
-            mx="2rem"
-            variant={isMinWidthLg ? 'title' : 'body'}
-            color="gray.100"
-            textAlign="center"
-          >
-            Bom instrutor e atencioso na consultoria informando melhor de se
-            exercitar e tirar proveito lorem ipsum, lorem ipsum lorem ipsum
-            lorem ipsumlorem ipsumlorem ipsum
-          </Typography>
-          <Typography
-            mt="4rem"
-            variant={isMinWidthLg ? 'title' : 'body'}
-            color="gray.100"
-            textAlign="center"
-          >
-            Mateus Castro
-          </Typography>
-          <Typography variant="body" color="gray.100" textAlign="center">
-            Avaliação WhatsApp
-          </Typography>
-        </Box>
-        <Box>
-          <Typography
-            mx="2rem"
-            variant={isMinWidthLg ? 'title' : 'body'}
-            color="gray.100"
-            textAlign="center"
-          >
-            Bom instrutor e atencioso na consultoria informando melhor de se
-            exercitar e tirar proveito lorem ipsum, lorem ipsum lorem ipsum
-            lorem ipsumlorem ipsumlorem ipsum
-          </Typography>
-          <Typography
-            mt="4rem"
-            variant="body"
-            color="gray.100"
-            textAlign="center"
-          >
-            Mateus Castro
-          </Typography>
-          <Typography variant="body" color="gray.100" textAlign="center">
-            Avaliação WhatsApp
-          </Typography>
-        </Box>
+        {data.map((value, index) => {
+          return (
+            <Box key={value.name}>
+              <Typography
+                mx="2rem"
+                variant={isMinWidthLg ? 'title' : 'body'}
+                color="gray.100"
+                textAlign="center"
+              >
+                {value.text}
+              </Typography>
+              <Typography
+                mt="4rem"
+                variant={isMinWidthLg ? 'title' : 'body'}
+                color="gray.100"
+                textAlign="center"
+              >
+                {value.name}
+              </Typography>
+              <Typography variant="body" color="gray.100" textAlign="center">
+                {value.social}
+              </Typography>
+            </Box>
+          )
+        })}
       </Slider>
     </Box>
   )
