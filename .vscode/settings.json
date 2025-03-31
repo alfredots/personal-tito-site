@@ -1,6 +1,10 @@
 {
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  }
+    "source.fixAll.eslint": "explicit"
+  },
+  "prettier.documentSelectors": ["**/*.astro"],
+  "explorer.compactFolders": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "tailwindCSS.classAttributes": ["class"]
 }
