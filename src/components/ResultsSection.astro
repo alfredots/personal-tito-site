@@ -1,0 +1,105 @@
+---
+const transformations = [
+	{
+		image: "https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+		name: "Sarah M.",
+		duration: "6 Meses",
+		description: "Perdeu 13 kg e ganhou força incrível. Agora mantém um estilo de vida saudável com nutrição equilibrada."
+	},
+	{
+		image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+		name: "James K.",
+		duration: "4 Meses",
+		description: "Ganhou 7 kg de músculo e melhorou a mobilidade geral. Está treinando para sua primeira meia maratona."
+	},
+	{
+		image: "https://images.unsplash.com/photo-1529516548873-9ce57c8f155e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+		name: "Emma R.",
+		duration: "3 Meses",
+		description: "Transformou sua relação com o fitness e reduziu 12% de gordura corporal. Agora foca em metas de força."
+	},
+	{
+		image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+		name: "David P.",
+		duration: "8 Meses",
+		description: "Transformou completamente seu físico após anos de sedentarismo. Perdeu 20 kg e recuperou a confiança."
+	},
+	{
+		image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+		name: "Michael T.",
+		duration: "5 Meses",
+		description: "Construiu músculos magros e melhorou o desempenho atlético. Agora compete em competições esportivas amadoras."
+	}
+];
+---
+
+<section id="results" class="py-20 md:py-32">
+	<div class="section-container">
+		<div class="mb-16 text-center">
+			<div class="heading-accent">Transformações Reais de Clientes</div>
+			<h2 class="section-title">Resultados que Falam por Si</h2>
+			<p class="section-subtitle">Veja como nossa abordagem de coaching personalizado ajudou clientes a alcançar transformações incríveis.</p>
+		</div>
+
+		<div class="relative overflow-hidden">
+			<div class="horizontal-scroll flex gap-6" id="scroll-container">
+				{
+					transformations.concat(transformations).map((transformation, index) => (
+						<div class="glass-card min-w-[300px] max-w-[350px] overflow-hidden">
+							<div class="relative aspect-[3/4]">
+								<img src={transformation.image} alt={`Transformação de ${transformation.name}`} class="h-full w-full object-cover" />
+							</div>
+							<div class="p-6">
+								<h3 class="mb-1 text-lg font-medium">{transformation.name}</h3>
+								<p class="mb-3 text-sm text-muted-foreground">{transformation.duration} de Transformação</p>
+								<p class="text-sm">{transformation.description}</p>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const scrollContainer = document.getElementById("scroll-container");
+
+	function startInfiniteScroll() {
+		if (!scrollContainer) return;
+
+		let scrollAmount = 1; // Pixels para rolar por frame
+		const scrollSpeed = 20; // Milissegundos por frame
+
+		function scroll() {
+			if (!scrollContainer) return;
+			scrollContainer.scrollLeft += scrollAmount;
+
+			// Verifica se chegou ao final e reinicia
+			if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+				scrollContainer.scrollLeft = 0;
+			}
+
+			requestAnimationFrame(scroll);
+		}
+
+		setTimeout(scroll, scrollSpeed);
+	}
+
+	document.addEventListener("DOMContentLoaded", startInfiniteScroll);
+</script>
+
+<style>
+	.horizontal-scroll {
+		display: flex;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+
+	.horizontal-scroll::-webkit-scrollbar {
+		display: none;
+	}
+</style>
