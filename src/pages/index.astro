@@ -3,10 +3,9 @@ import Header from "../components/Header.astro";
 import Layout from "../layouts/Layout.astro";
 import PersonalTrainerSection from "../components/PersonalTrainerSection.astro";
 import AboutSection from "../components/AboutSection.astro";
-import ResultsSection from "@/components/ResultsSection.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import ResultsSection from "../components/ResultsSection.astro";
+import TestimonialsSection from "../components/TestimonialsSection.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
@@ -18,5 +17,10 @@ import ResultsSection from "@/components/ResultsSection.astro";
 			<div class="absolute left-0 top-0 z-10 h-16 w-full bg-gradient-to-b from-secondary/50 to-transparent"></div>
 			<ResultsSection />
 		</div>
+		<div class="relative">
+			<div class="absolute left-0 top-0 z-10 h-16 w-full bg-gradient-to-b from-background to-transparent"></div>
+			<TestimonialsSection />
+		</div>
+		<Footer />
 	</div>
 </Layout>

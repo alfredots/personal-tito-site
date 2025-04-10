@@ -1,0 +1,110 @@
+---
+const testimonials = [
+	{
+		quote: "O Tito mudou minha relação com a academia. Hoje eu treino com foco e resultados que nunca imaginei ter.",
+		author: "Jessica Miller",
+		role: "Perdeu 16 kg em 6 meses"
+	},
+	{
+		quote: "Achei que fosse só mais um plano de treino… mas encontrei um acompanhamento que mudou meu corpo e minha autoestima.",
+		author: "Mark Thompson",
+		role: "Ganhou músculo e melhorou performance"
+	},
+	{
+		quote: "O cuidado que ele tem com cada detalhe impressiona. Cada ajuste é certeiro!",
+		author: "Samantha Wilson",
+		role: "Vencedora de competição fitness"
+	}
+];
+---
+
+<section id="testimonials" class="bg-secondary/50 py-20 md:py-32">
+	<div class="section-container">
+		<div class="mb-16 text-center">
+			<div class="heading-accent">Feedback dos Clientes</div>
+			<h2 class="section-title">O que Meus Clientes Dizem</h2>
+			<p class="section-subtitle">Nada melhor do que ouvir de quem já vive a transformação:</p>
+		</div>
+
+		<div class="mx-auto max-w-3xl">
+			<div class="relative min-h-[280px]" id="testimonials-container">
+				{
+					testimonials.map((testimonial, index) => (
+						<div class="testimonial-slide invisible absolute left-0 right-0 top-0 opacity-0 transition-all duration-700 ease-in-out" data-index={index}>
+							<div class="glass-card p-8">
+								<div class="mb-6">
+									<svg width="45" height="36" viewBox="0 0 45 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M13.44 36C9.6 36 6.4 34.64 3.84 31.92C1.28 29.2 0 25.84 0 21.84C0 17.52 1.28 13.52 3.84 9.84C6.4 6.16 9.92 3.12 14.4 0.719999L18.24 5.28C14.72 7.36 12 9.68 10.08 12.24C8.16 14.8 7.2 17.2 7.2 19.44C7.2 20.08 7.28 20.56 7.44 20.88C7.6 21.2 7.84 21.44 8.16 21.6C8.8 21.12 9.84 20.88 11.28 20.88C13.44 20.88 15.28 21.6 16.8 23.04C18.32 24.48 19.08 26.4 19.08 28.8C19.08 31.2 18.24 33.12 16.56 34.56C14.88 35.52 13.28 36 13.44 36ZM37.44 36C33.6 36 30.4 34.64 27.84 31.92C25.28 29.2 24 25.84 24 21.84C24 17.52 25.28 13.52 27.84 9.84C30.4 6.16 33.92 3.12 38.4 0.719999L42.24 5.28C38.72 7.36 36 9.68 34.08 12.24C32.16 14.8 31.2 17.2 31.2 19.44C31.2 20.08 31.28 20.56 31.44 20.88C31.6 21.2 31.84 21.44 32.16 21.6C32.8 21.12 33.84 20.88 35.28 20.88C37.44 20.88 39.28 21.6 40.8 23.04C42.32 24.48 43.08 26.4 43.08 28.8C43.08 31.2 42.24 33.12 40.56 34.56C38.88 35.52 37.28 36 37.44 36Z"
+											fill="rgba(0,0,0,0.07)"
+										/>
+									</svg>
+								</div>
+
+								<p class="mb-8 text-lg leading-relaxed md:text-xl">{testimonial.quote}</p>
+
+								<div class="flex items-center">
+									<div class="mr-4 h-12 w-12 rounded-full bg-secondary" />
+									<div>
+										<div class="font-medium">{testimonial.author}</div>
+										<div class="text-sm text-muted-foreground">{testimonial.role}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.testimonial-slide {
+		transform: translateY(20px);
+	}
+
+	.testimonial-slide.active {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+</style>
+
+<script lang="ts">
+	const slides = document.querySelectorAll(".testimonial-slide");
+	let currentIndex = 0;
+	const totalSlides = slides.length;
+
+	function showSlide(index) {
+		slides.forEach((slide) => {
+			slide.classList.remove("active");
+		});
+
+		slides[index].classList.add("active");
+		currentIndex = index;
+	}
+
+	function nextSlide() {
+		const nextIndex = (currentIndex + 1) % totalSlides;
+		showSlide(nextIndex);
+	}
+
+	// Mostrar o primeiro slide
+	showSlide(0);
+
+	// Iniciar o carrossel automático
+	const autoplayInterval = 5000; // 5 segundos
+	let autoplayTimer = setInterval(nextSlide, autoplayInterval);
+
+	// Pausar o carrossel quando o mouse estiver sobre ele
+	const testimonialContainer = document.getElementById("testimonials-container");
+
+	testimonialContainer?.addEventListener("mouseenter", () => {
+		clearInterval(autoplayTimer);
+	});
+
+	testimonialContainer?.addEventListener("mouseleave", () => {
+		autoplayTimer = setInterval(nextSlide, autoplayInterval);
+	});
+</script>

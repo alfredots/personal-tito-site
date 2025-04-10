@@ -1,4 +1,6 @@
 ---
+import { whatsappLink } from "../assets/data";
+
 const transformations = [
 	{
 		image: "https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
@@ -38,7 +40,7 @@ const transformations = [
 		<div class="mb-16 text-center">
 			<div class="heading-accent">Transformações Reais de Clientes</div>
 			<h2 class="section-title">Resultados que Falam por Si</h2>
-			<p class="section-subtitle">Veja como nossa abordagem de coaching personalizado ajudou clientes a alcançar transformações incríveis.</p>
+			<p class="section-subtitle">Resultados que falam mais alto que palavras. Conheça algumas das mulheres que decidiram confiar no processo e transformaram seus corpos e suas vidas:</p>
 		</div>
 
 		<div class="relative overflow-hidden">
@@ -58,6 +60,15 @@ const transformations = [
 					))
 				}
 			</div>
+		</div>
+
+		<div class="mt-16 text-center">
+			<a
+				href={whatsappLink}
+				class="btn-animated inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 hover:bg-primary/90 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/50"
+			>
+				Quero fazer parte do time!
+			</a>
 		</div>
 	</div>
 </section>
