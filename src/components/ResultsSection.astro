@@ -81,90 +81,33 @@ const transformations = [
 			return;
 		}
 
-		let isScrolling = true;
-		let scrollAmount = 1;
+		const scrollAmount = 1;
 		const scrollSpeed = 20;
-		let animationFrameId = null;
 
 		// Função para scroll
 		function scroll() {
 			if (!scrollContainer) return;
-			if (!isScrolling) return;
 
 			scrollContainer.scrollLeft += scrollAmount;
 
 			// Verifica se chegou ao final
 			if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-				// Volta suavemente ao início
+				// Volta ao início
 				scrollContainer.scrollLeft = 0;
 			}
 
-			animationFrameId = requestAnimationFrame(scroll);
+			requestAnimationFrame(scroll);
 		}
-
-		// Inicia o scroll
-		function startScroll() {
-			isScrolling = true;
-			scroll();
-		}
-
-		// Para o scroll
-		function stopScroll() {
-			isScrolling = false;
-			if (animationFrameId) {
-				cancelAnimationFrame(animationFrameId);
-			}
-		}
-
-		// Tratamento de eventos touch
-		let touchStartX = 0;
-		let touchEndX = 0;
-
-		scrollContainer.addEventListener(
-			"touchstart",
-			(e) => {
-				touchStartX = e.touches[0].clientX;
-				stopScroll();
-			},
-			{ passive: true }
-		);
-
-		scrollContainer.addEventListener(
-			"touchend",
-			(e) => {
-				touchEndX = e.changedTouches[0].clientX;
-				// Reinicia o scroll após o usuário terminar o touch
-				setTimeout(startScroll, 1000);
-			},
-			{ passive: true }
-		);
-
-		scrollContainer.addEventListener(
-			"touchmove",
-			(e) => {
-				const currentX = e.touches[0].clientX;
-				const diff = touchStartX - currentX;
-				scrollContainer.scrollLeft += diff;
-				touchStartX = currentX;
-			},
-			{ passive: true }
-		);
-
-		// Pausa quando o usuário interage com mouse
-		scrollContainer.addEventListener("mouseenter", stopScroll);
-		scrollContainer.addEventListener("mouseleave", startScroll);
 
 		// Verifica visibilidade da página
 		document.addEventListener("visibilitychange", () => {
-			if (document.hidden) {
-				stopScroll();
-			} else {
-				startScroll();
+			if (!document.hidden) {
+				scroll();
 			}
 		});
 
 		// Inicia o scroll inicial
-		setTimeout(startScroll, scrollSpeed);
+		setTimeout(() => scroll(), scrollSpeed);
 	}
 
 	// Inicia quando o DOM estiver pronto
