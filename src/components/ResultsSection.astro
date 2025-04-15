@@ -84,34 +84,16 @@ const transformations = [
 		const scrollAmount = 1;
 		const scrollSpeed = 20;
 
-		// Função para scroll
-		function scroll() {
-			if (!scrollContainer) return;
-
+		setInterval(() => {
 			scrollContainer.scrollLeft += scrollAmount;
 
-			// Verifica se chegou ao final
 			if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-				// Volta ao início
 				scrollContainer.scrollLeft = 0;
 			}
-
-			requestAnimationFrame(scroll);
-		}
-
-		// Verifica visibilidade da página
-		document.addEventListener("visibilitychange", () => {
-			if (!document.hidden) {
-				scroll();
-			}
-		});
-
-		// Inicia o scroll inicial
-		setTimeout(() => scroll(), scrollSpeed);
+		}, scrollSpeed);
 	}
 
-	// Inicia quando o DOM estiver pronto
-	startInfiniteScroll();
+	document.addEventListener("DOMContentLoaded", startInfiniteScroll);
 </script>
 
 <style>
