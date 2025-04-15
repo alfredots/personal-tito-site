@@ -24,7 +24,7 @@ const testimonials = [
 		</div>
 
 		<div class="mx-auto max-w-3xl">
-			<div class="relative min-h-[280px]" id="testimonials-container">
+			<div class="relative min-h-[500px]" id="testimonials-container">
 				{
 					testimonials.map((testimonial, index) => (
 						<div class="testimonial-slide invisible absolute left-0 right-0 top-0 opacity-0 transition-all duration-700 ease-in-out" data-index={index}>
@@ -44,7 +44,6 @@ const testimonials = [
 									<div class="mr-4 h-12 w-12 rounded-full bg-secondary" />
 									<div>
 										<div class="font-medium">{testimonial.author}</div>
-										<div class="text-sm text-muted-foreground">{testimonial.role}</div>
 									</div>
 								</div>
 							</div>
