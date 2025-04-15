@@ -1,36 +1,36 @@
 ---
 import { whatsappLink } from "../assets/data";
+import resultOne from "../assets/results/result-1.jpeg";
+import resultTwo from "../assets/results/result-2.jpeg";
+import resultThree from "../assets/results/result-3.jpeg";
+import resultFour from "../assets/results/result-6.jpeg";
+import resultFive from "../assets/results/result-5.jpeg";
 
 const transformations = [
 	{
-		image: "https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
-		name: "Sarah M.",
-		duration: "6 Meses",
-		description: "Perdeu 13 kg e ganhou força incrível. Agora mantém um estilo de vida saudável com nutrição equilibrada."
+		image: resultOne.src,
+		name: "Aluna M.",
+		duration: "6 Meses"
 	},
 	{
-		image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-		name: "James K.",
-		duration: "4 Meses",
-		description: "Ganhou 7 kg de músculo e melhorou a mobilidade geral. Está treinando para sua primeira meia maratona."
+		image: resultTwo.src,
+		name: "Aluna K.",
+		duration: "4 Meses"
 	},
 	{
-		image: "https://images.unsplash.com/photo-1529516548873-9ce57c8f155e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
-		name: "Emma R.",
-		duration: "3 Meses",
-		description: "Transformou sua relação com o fitness e reduziu 12% de gordura corporal. Agora foca em metas de força."
+		image: resultThree.src,
+		name: "Aluna R.",
+		duration: "3 Meses"
 	},
 	{
-		image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-		name: "David P.",
-		duration: "8 Meses",
-		description: "Transformou completamente seu físico após anos de sedentarismo. Perdeu 20 kg e recuperou a confiança."
+		image: resultFour.src,
+		name: "Aluna P.",
+		duration: "8 Meses"
 	},
 	{
-		image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-		name: "Michael T.",
-		duration: "5 Meses",
-		description: "Construiu músculos magros e melhorou o desempenho atlético. Agora compete em competições esportivas amadoras."
+		image: resultFive.src,
+		name: "Aluna T.",
+		duration: "5 Meses"
 	}
 ];
 ---
@@ -54,7 +54,6 @@ const transformations = [
 							<div class="p-6">
 								<h3 class="mb-1 text-lg font-medium">{transformation.name}</h3>
 								<p class="mb-3 text-sm text-muted-foreground">{transformation.duration} de Transformação</p>
-								<p class="text-sm">{transformation.description}</p>
 							</div>
 						</div>
 					))
@@ -73,30 +72,102 @@ const transformations = [
 	</div>
 </section>
 
-<script>
+<script lang="ts">
 	const scrollContainer = document.getElementById("scroll-container");
 
 	function startInfiniteScroll() {
-		if (!scrollContainer) return;
+		if (!scrollContainer) {
+			console.warn("Elemento scroll-container não encontrado");
+			return;
+		}
 
-		let scrollAmount = 1; // Pixels para rolar por frame
-		const scrollSpeed = 20; // Milissegundos por frame
+		let isScrolling = true;
+		let scrollAmount = 1;
+		const scrollSpeed = 20;
+		let animationFrameId = null;
 
+		// Função para scroll
 		function scroll() {
 			if (!scrollContainer) return;
+			if (!isScrolling) return;
+
 			scrollContainer.scrollLeft += scrollAmount;
 
-			// Verifica se chegou ao final e reinicia
-			if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+			// Verifica se chegou ao final
+			if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+				// Volta suavemente ao início
 				scrollContainer.scrollLeft = 0;
 			}
 
-			requestAnimationFrame(scroll);
+			animationFrameId = requestAnimationFrame(scroll);
 		}
 
-		setTimeout(scroll, scrollSpeed);
+		// Inicia o scroll
+		function startScroll() {
+			isScrolling = true;
+			scroll();
+		}
+
+		// Para o scroll
+		function stopScroll() {
+			isScrolling = false;
+			if (animationFrameId) {
+				cancelAnimationFrame(animationFrameId);
+			}
+		}
+
+		// Tratamento de eventos touch
+		let touchStartX = 0;
+		let touchEndX = 0;
+
+		scrollContainer.addEventListener(
+			"touchstart",
+			(e) => {
+				touchStartX = e.touches[0].clientX;
+				stopScroll();
+			},
+			{ passive: true }
+		);
+
+		scrollContainer.addEventListener(
+			"touchend",
+			(e) => {
+				touchEndX = e.changedTouches[0].clientX;
+				// Reinicia o scroll após o usuário terminar o touch
+				setTimeout(startScroll, 1000);
+			},
+			{ passive: true }
+		);
+
+		scrollContainer.addEventListener(
+			"touchmove",
+			(e) => {
+				const currentX = e.touches[0].clientX;
+				const diff = touchStartX - currentX;
+				scrollContainer.scrollLeft += diff;
+				touchStartX = currentX;
+			},
+			{ passive: true }
+		);
+
+		// Pausa quando o usuário interage com mouse
+		scrollContainer.addEventListener("mouseenter", stopScroll);
+		scrollContainer.addEventListener("mouseleave", startScroll);
+
+		// Verifica visibilidade da página
+		document.addEventListener("visibilitychange", () => {
+			if (document.hidden) {
+				stopScroll();
+			} else {
+				startScroll();
+			}
+		});
+
+		// Inicia o scroll inicial
+		setTimeout(startScroll, scrollSpeed);
 	}
 
+	// Inicia quando o DOM estiver pronto
 	document.addEventListener("DOMContentLoaded", startInfiniteScroll);
 </script>
 
