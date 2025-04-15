@@ -81,36 +81,46 @@ const transformations = [
 			return;
 		}
 
-		const scrollAmount = 1;
-		const scrollSpeed = 20;
+		let position = 0;
+		const speed = 1;
 
-		setInterval(() => {
-			scrollContainer.scrollLeft += scrollAmount;
+		function animate() {
+			position -= speed;
 
-			if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-				scrollContainer.scrollLeft = 0;
+			// Reset quando todo o conteúdo passou
+			if (Math.abs(position) >= scrollContainer.scrollWidth) {
+				position = 0;
 			}
-		}, scrollSpeed);
+
+			scrollContainer.style.transform = `translateX(${position}px)`;
+			requestAnimationFrame(animate);
+		}
+
+		// Adicione estas propriedades CSS via JavaScript
+		scrollContainer.style.willChange = "transform";
+		scrollContainer.style.transform = "translateZ(0)";
+
+		requestAnimationFrame(animate);
 	}
 
-	document.addEventListener("DOMContentLoaded", startInfiniteScroll);
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", startInfiniteScroll);
+	} else {
+		startInfiniteScroll();
+	}
 </script>
 
 <style>
 	.horizontal-scroll {
 		display: flex;
-		overflow-x: auto;
+		overflow: hidden; /* Mudado de overflow-x: auto para hidden */
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
 		-ms-overflow-style: none;
-		/* Removido scroll-snap-type */
-
-		/* Adicione estas propriedades */
 		scroll-behavior: smooth;
 		-webkit-backface-visibility: hidden;
 		-webkit-perspective: 1000;
-		transform: translate3d(0, 0, 0);
-		will-change: scroll-position;
+		will-change: transform;
 	}
 
 	.horizontal-scroll::-webkit-scrollbar {
