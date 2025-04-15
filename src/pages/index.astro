@@ -1,0 +1,26 @@
+---
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
+import PersonalTrainerSection from "../components/PersonalTrainerSection.astro";
+import AboutSection from "../components/AboutSection.astro";
+import ResultsSection from "../components/ResultsSection.astro";
+import TestimonialsSection from "../components/TestimonialsSection.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout>
+	<div class="min-h-screen font-sans">
+		<Header />
+		<PersonalTrainerSection />
+		<AboutSection />
+		<div class="relative">
+			<div class="absolute left-0 top-0 z-10 h-16 w-full bg-gradient-to-b from-secondary/50 to-transparent"></div>
+			<ResultsSection />
+		</div>
+		<div class="relative">
+			<div class="absolute left-0 top-0 z-10 h-16 w-full bg-gradient-to-b from-background to-transparent"></div>
+			<TestimonialsSection />
+		</div>
+		<Footer />
+	</div>
+</Layout>

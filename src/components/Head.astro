@@ -1,0 +1,38 @@
+---
+const seo = {
+	title: "JAPA TEAM | CONSULTORIA ONLINE",
+	description:
+		"Consultoria online especializada em transformar a autoestima de mulheres através de treinos personalizados, nutrição sem terrorismo e acompanhamento próximo. Foco em resultados estéticos, saúde mental e física, com métodos baseados em ciência e dedicação.",
+	keywords: [
+		"consultoria online",
+		"treino personalizado",
+		"emagrecimento saudável",
+		"cinturinha fina",
+		"treinamento feminino",
+		"nutrição sem terrorismo",
+		"resultados estéticos",
+		"saúde mental",
+		"acompanhamento fitness",
+		"transformação física",
+		"treino pesado",
+		"dieta personalizada",
+		"mulheres 20-45 anos",
+		"foco em glúteos e quadríceps",
+		"celulite e flacidez"
+	],
+	image: "/caminho-da-imagem.jpg",
+	url: "https://seusite.com/pagina"
+};
+
+const keywordsString = seo.keywords.join(", ");
+---
+
+<title>{seo.title}</title>
+<meta name="description" content={seo.description} />
+<meta name="keywords" content={keywordsString} />
+<meta property="og:title" content={seo.title} />
+<meta property="og:description" content={seo.description} />
+<meta property="og:image" content={seo.image} />
+<meta property="og:url" content={seo.url} />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/favicon.ico" />

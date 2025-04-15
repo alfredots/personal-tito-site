@@ -1,0 +1,187 @@
+---
+import { whatsappLink } from "../assets/data";
+import resultOne from "../assets/results/result-1.jpeg";
+import resultTwo from "../assets/results/result-2.jpeg";
+import resultThree from "../assets/results/result-3.jpeg";
+import resultFour from "../assets/results/result-6.jpeg";
+import resultFive from "../assets/results/result-5.jpeg";
+
+const transformations = [
+	{
+		image: resultOne.src,
+		name: "Aluna M.",
+		duration: "6 Meses"
+	},
+	{
+		image: resultTwo.src,
+		name: "Aluna K.",
+		duration: "4 Meses"
+	},
+	{
+		image: resultThree.src,
+		name: "Aluna R.",
+		duration: "3 Meses"
+	},
+	{
+		image: resultFour.src,
+		name: "Aluna P.",
+		duration: "8 Meses"
+	},
+	{
+		image: resultFive.src,
+		name: "Aluna T.",
+		duration: "5 Meses"
+	}
+];
+---
+
+<section id="results" class="py-20 md:py-32">
+	<div class="section-container">
+		<div class="mb-16 text-center">
+			<div class="heading-accent">Transformações Reais de Clientes</div>
+			<h2 class="section-title">Resultados que Falam por Si</h2>
+			<p class="section-subtitle">Resultados que falam mais alto que palavras. Conheça algumas das mulheres que decidiram confiar no processo e transformaram seus corpos e suas vidas:</p>
+		</div>
+
+		<div class="relative overflow-hidden">
+			<div class="horizontal-scroll flex gap-6" id="scroll-container">
+				{
+					transformations.concat(transformations).map((transformation, index) => (
+						<div class="glass-card min-w-[300px] max-w-[350px] overflow-hidden">
+							<div class="relative aspect-[3/4]">
+								<img src={transformation.image} alt={`Transformação de ${transformation.name}`} class="h-full w-full object-cover" />
+							</div>
+							<div class="p-6">
+								<h3 class="mb-1 text-lg font-medium">{transformation.name}</h3>
+								<p class="mb-3 text-sm text-muted-foreground">{transformation.duration} de Transformação</p>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="mt-16 text-center">
+			<a
+				href={whatsappLink}
+				class="btn-animated inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 hover:bg-primary/90 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/50"
+			>
+				Quero fazer parte do time!
+			</a>
+		</div>
+	</div>
+</section>
+
+<script lang="ts">
+	const scrollContainer = document.getElementById("scroll-container");
+
+	function startInfiniteScroll() {
+		if (!scrollContainer) {
+			console.warn("Elemento scroll-container não encontrado");
+			return;
+		}
+
+		let isScrolling = true;
+		let scrollAmount = 1;
+		const scrollSpeed = 20;
+		let animationFrameId = null;
+
+		// Função para scroll
+		function scroll() {
+			if (!scrollContainer) return;
+			if (!isScrolling) return;
+
+			scrollContainer.scrollLeft += scrollAmount;
+
+			// Verifica se chegou ao final
+			if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+				// Volta suavemente ao início
+				scrollContainer.scrollLeft = 0;
+			}
+
+			animationFrameId = requestAnimationFrame(scroll);
+		}
+
+		// Inicia o scroll
+		function startScroll() {
+			isScrolling = true;
+			scroll();
+		}
+
+		// Para o scroll
+		function stopScroll() {
+			isScrolling = false;
+			if (animationFrameId) {
+				cancelAnimationFrame(animationFrameId);
+			}
+		}
+
+		// Tratamento de eventos touch
+		let touchStartX = 0;
+		let touchEndX = 0;
+
+		scrollContainer.addEventListener(
+			"touchstart",
+			(e) => {
+				touchStartX = e.touches[0].clientX;
+				stopScroll();
+			},
+			{ passive: true }
+		);
+
+		scrollContainer.addEventListener(
+			"touchend",
+			(e) => {
+				touchEndX = e.changedTouches[0].clientX;
+				// Reinicia o scroll após o usuário terminar o touch
+				setTimeout(startScroll, 1000);
+			},
+			{ passive: true }
+		);
+
+		scrollContainer.addEventListener(
+			"touchmove",
+			(e) => {
+				const currentX = e.touches[0].clientX;
+				const diff = touchStartX - currentX;
+				scrollContainer.scrollLeft += diff;
+				touchStartX = currentX;
+			},
+			{ passive: true }
+		);
+
+		// Pausa quando o usuário interage com mouse
+		scrollContainer.addEventListener("mouseenter", stopScroll);
+		scrollContainer.addEventListener("mouseleave", startScroll);
+
+		// Verifica visibilidade da página
+		document.addEventListener("visibilitychange", () => {
+			if (document.hidden) {
+				stopScroll();
+			} else {
+				startScroll();
+			}
+		});
+
+		// Inicia o scroll inicial
+		setTimeout(startScroll, scrollSpeed);
+	}
+
+	// Inicia quando o DOM estiver pronto
+	document.addEventListener("DOMContentLoaded", startInfiniteScroll);
+</script>
+
+<style>
+	.horizontal-scroll {
+		display: flex;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+
+	.horizontal-scroll::-webkit-scrollbar {
+		display: none;
+	}
+</style>

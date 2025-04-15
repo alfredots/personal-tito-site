@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --background-soft: 0 0% 5%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 75% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 0 75% 40%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 75% 50%;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("https://static.parastorage.com/services/santa-resources/resources/viewer/user-site-fonts/fonts/SanFrancisco/v7/sf-pro-display_regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("https://static.parastorage.com/services/santa-resources/resources/viewer/user-site-fonts/fonts/SanFrancisco/v7/sf-pro-display_medium.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("https://static.parastorage.com/services/santa-resources/resources/viewer/user-site-fonts/fonts/SanFrancisco/v7/sf-pro-display_semibold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@layer components {
+  .section-container {
+    @apply mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply mb-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl;
+  }
+
+  .section-subtitle {
+    @apply mx-auto mb-12 max-w-2xl text-lg text-muted-foreground sm:text-xl;
+  }
+
+  .heading-accent {
+    @apply mb-3 text-sm font-medium uppercase tracking-wider text-primary;
+  }
+
+  .button-primary {
+    @apply rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-all duration-300 ease-in-out hover:bg-primary/50;
+  }
+
+  .button-secondary {
+    @apply rounded-lg bg-secondary px-6 py-3 font-medium text-secondary-foreground transition-all hover:translate-y-[-2px] hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-primary/50 active:translate-y-[0px] active:scale-[0.98];
+  }
+
+  .glass-card {
+    @apply rounded-2xl border border-white/10 bg-secondary/90 shadow-md backdrop-blur-md transition-all hover:border-white/20;
+  }
+
+  .plan-card {
+    @apply glass-card flex h-full flex-col p-8 transition-all duration-300 hover:translate-y-[-6px] hover:shadow-xl;
+  }
+}
+
+/* Lazy loading image effect */
+.lazy-image {
+  background: #f4f4f5;
+  overflow: hidden;
+  position: relative;
+}
+
+.lazy-image img {
+  transition:
+    filter 0.5s ease-out,
+    transform 0.7s ease-out;
+  transform: scale(1.05);
+  filter: blur(10px);
+}
+
+.lazy-image img.loaded {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* Parallax scroll effect */
+.parallax {
+  transform: translateY(0);
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+/* Horizontal scroll section */
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  padding-bottom: 20px;
+  gap: 20px;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Section transitions */
+.section-transition {
+  position: relative;
+}
+
+.section-transition::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, hsl(var(--background)), transparent);
+  z-index: 1;
+}
+
+.staggered-animation > * {
+  opacity: 0;
+}
+
+.staggered-animation > *:nth-child(1) {
+  animation: fade-in 0.5s ease-out 0.1s forwards;
+}
+
+.staggered-animation > *:nth-child(2) {
+  animation: fade-in 0.5s ease-out 0.2s forwards;
+}
+
+.staggered-animation > *:nth-child(3) {
+  animation: fade-in 0.5s ease-out 0.3s forwards;
+}
+
+.staggered-animation > *:nth-child(4) {
+  animation: fade-in 0.5s ease-out 0.4s forwards;
+}
+
+.staggered-animation > *:nth-child(5) {
+  animation: fade-in 0.5s ease-out 0.5s forwards;
+}
+
+@keyframes ping-smooth {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); /* primary */
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.btn-animated {
+  animation: ping-smooth 2.5s infinite;
+}

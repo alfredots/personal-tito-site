@@ -1,0 +1,44 @@
+---
+import { whatsappLink } from "../assets/data";
+---
+
+<header id="navbar" class="fixed left-0 right-0 top-0 z-50 bg-transparent py-6 transition-all duration-300 ease-in-out">
+	<div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="flex items-center justify-between">
+			<div class="flex items-center">
+				<a href="#" class="text-xl font-semibold tracking-tight">
+					JAPA<span class="font-bold text-primary">TEAM</span>
+				</a>
+			</div>
+
+			<div>
+				<a href={whatsappLink} class="button-primary inline-flex">Começar agora!</a>
+			</div>
+		</div>
+	</div>
+</header>
+
+<script>
+	// Handle scroll effect
+	const navbar = document.getElementById("navbar");
+
+	function handleScroll() {
+		if (!navbar) {
+			return;
+		}
+
+		if (window.scrollY > 10) {
+			navbar.classList.remove("bg-transparent");
+			navbar.classList.add("bg-backgroundSoft", "shadow-md", "py-4");
+		} else {
+			navbar.classList.add("bg-transparent", "py-6");
+			navbar.classList.remove("bg-backgroundSoft", "shadow-md", "py-4");
+		}
+	}
+
+	// Inicializa o estado do header com base na posição inicial da página
+	handleScroll();
+
+	// Adiciona o event listener para o scroll
+	window.addEventListener("scroll", handleScroll);
+</script>
