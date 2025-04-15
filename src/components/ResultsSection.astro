@@ -100,10 +100,17 @@ const transformations = [
 	.horizontal-scroll {
 		display: flex;
 		overflow-x: auto;
-		scroll-snap-type: x mandatory;
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
 		-ms-overflow-style: none;
+		/* Removido scroll-snap-type */
+
+		/* Adicione estas propriedades */
+		scroll-behavior: smooth;
+		-webkit-backface-visibility: hidden;
+		-webkit-perspective: 1000;
+		transform: translate3d(0, 0, 0);
+		will-change: scroll-position;
 	}
 
 	.horizontal-scroll::-webkit-scrollbar {
