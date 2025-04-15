@@ -43,11 +43,11 @@ const transformations = [
 			<p class="section-subtitle">Resultados que falam mais alto que palavras. Conheça algumas das mulheres que decidiram confiar no processo e transformaram seus corpos e suas vidas:</p>
 		</div>
 
-		<div class="relative overflow-hidden">
+		<div class="scroll-wrapper overflow-hidden">
 			<div class="horizontal-scroll flex gap-6" id="scroll-container">
 				{
 					transformations.concat(transformations).map((transformation, index) => (
-						<div class="glass-card min-w-[300px] max-w-[350px] overflow-hidden">
+						<div class="card glass-card min-w-[300px] max-w-[350px] overflow-hidden">
 							<div class="relative aspect-[3/4]">
 								<img src={transformation.image} alt={`Transformação de ${transformation.name}`} class="h-full w-full object-cover" />
 							</div>
@@ -81,14 +81,24 @@ const transformations = [
 			return;
 		}
 
+		// Clone os itens para criar o efeito infinito
+		const originalItems = Array.from(scrollContainer.children);
+		originalItems.forEach((item) => {
+			const clone = item.cloneNode(true);
+			scrollContainer.appendChild(clone);
+		});
+
 		let position = 0;
 		const speed = 1;
 
 		function animate() {
 			position -= speed;
 
-			// Reset quando todo o conteúdo passou
-			if (Math.abs(position) >= scrollContainer.scrollWidth) {
+			// Calcula a largura do conteúdo original (antes dos clones)
+			const originalWidth = originalItems.reduce((width, item) => width + item.offsetWidth, 0);
+
+			// Reset quando o conteúdo original passou completamente
+			if (Math.abs(position) >= originalWidth) {
 				position = 0;
 			}
 
@@ -96,9 +106,11 @@ const transformations = [
 			requestAnimationFrame(animate);
 		}
 
-		// Adicione estas propriedades CSS via JavaScript
+		// Configurações CSS necessárias
 		scrollContainer.style.willChange = "transform";
 		scrollContainer.style.transform = "translateZ(0)";
+		scrollContainer.style.display = "flex";
+		scrollContainer.style.width = "max-content"; // Importante para conter todos os itens
 
 		requestAnimationFrame(animate);
 	}
@@ -111,19 +123,19 @@ const transformations = [
 </script>
 
 <style>
-	.horizontal-scroll {
-		display: flex;
-		overflow: hidden; /* Mudado de overflow-x: auto para hidden */
-		-webkit-overflow-scrolling: touch;
-		scrollbar-width: none;
-		-ms-overflow-style: none;
-		scroll-behavior: smooth;
-		-webkit-backface-visibility: hidden;
-		-webkit-perspective: 1000;
-		will-change: transform;
+	.scroll-wrapper {
+		width: 100%;
+		overflow: hidden;
+		position: relative;
 	}
 
-	.horizontal-scroll::-webkit-scrollbar {
-		display: none;
+	#scroll-container {
+		display: flex;
+		gap: 20px; /* espaço entre os cards */
+	}
+
+	.card {
+		flex-shrink: 0; /* impede que os cards encolham */
+		/* defina a largura e altura dos seus cards aqui */
 	}
 </style>
