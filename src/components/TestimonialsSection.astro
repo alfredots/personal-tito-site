@@ -1,19 +1,16 @@
 ---
 const testimonials = [
 	{
-		quote: "O Tito mudou minha relação com a academia. Hoje eu treino com foco e resultados que nunca imaginei ter.",
-		author: "Jessica Miller",
-		role: "Perdeu 16 kg em 6 meses"
+		quote: "Estou muito feliz com os meus resultados, de verdade! Consegui voltar a usar shorts tamanho 48, algo que não acontecia há muito tempo, pois não conseguia perder peso. Percebi que minha cintura está mais fina, e isso tem me feito sentir mais confiante e bonita. Até minha pele melhorou, com as celulites diminuindo visivelmente. Sou muito grata por ter tido o apoio necessário nessa jornada. Você foi essencial para que eu alcançasse tudo isso. Muito obrigada!",
+		author: "Aluna J."
 	},
 	{
-		quote: "Achei que fosse só mais um plano de treino… mas encontrei um acompanhamento que mudou meu corpo e minha autoestima.",
-		author: "Mark Thompson",
-		role: "Ganhou músculo e melhorou performance"
+		quote: "Hoje tive uma surpresa incrível! Usei uma calça que antes apertava as gordurinhas da minha cintura, e agora ela não está mais apertando. É muito gratificante perceber essas mudanças e ver os resultados aparecendo. Estou muito feliz!",
+		author: "Aluna M."
 	},
 	{
-		quote: "O cuidado que ele tem com cada detalhe impressiona. Cada ajuste é certeiro!",
-		author: "Samantha Wilson",
-		role: "Vencedora de competição fitness"
+		quote: "Hoje, enquanto eu fazia agachamento sumô na academia, a professora veio até mim e disse: 'Suas costas estão lindas, e quando você agacha, elas ficam ainda mais em evidência!' Fiquei tão feliz com o elogio que ela até pediu para tirar uma foto para eu ver. Foi um momento muito especial e motivador!",
+		author: "Aluna S."
 	}
 ];
 ---
@@ -62,6 +59,9 @@ const testimonials = [
 <style>
 	.testimonial-slide {
 		transform: translateY(20px);
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.5s ease-in-out;
 	}
 
 	.testimonial-slide.active {
